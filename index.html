@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harsh Bhatt — Data Analyst</title>
+<meta name="description" content="Harsh Bhatt — Data Analyst. SQL, Python, Power BI. Building production-grade analytics and AI systems. Delhi NCR, 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#e8e8e8;min-height:100vh;overflow-x:hidden;}
+canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
+.wrap{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:3rem 2rem;}
+
+.hero{padding-bottom:3rem;border-bottom:1px solid #1a1a1a;margin-bottom:3rem;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;color:#00ff88;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
+.hero-dot{width:7px;height:7px;border-radius:50%;background:#00ff88;box-shadow:0 0 8px #00ff88,0 0 16px rgba(0,255,136,0.4);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 6px #00ff88,0 0 12px rgba(0,255,136,0.3);}50%{box-shadow:0 0 12px #00ff88,0 0 28px rgba(0,255,136,0.6);}}
+.hero-name{font-size:52px;font-weight:600;color:#fff;line-height:1.1;margin-bottom:0.3rem;letter-spacing:-0.03em;}
+.hero-role{font-size:52px;font-weight:300;color:#1a3a26;line-height:1.1;letter-spacing:-0.03em;margin-bottom:1.5rem;}
+.hero-desc{font-size:15px;color:#555;line-height:1.9;max-width:520px;margin-bottom:1.75rem;}
+.hero-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:1.75rem;}
+.pill{font-family:'JetBrains Mono',monospace;font-size:10px;padding:5px 11px;border:1px solid #1a2e1a;border-radius:2px;color:#2a6b3a;transition:all 0.2s;cursor:default;}
+.pill:hover{border-color:#00ff88;color:#00ff88;box-shadow:0 0 8px rgba(0,255,136,0.15);}
+.hero-links{display:flex;gap:10px;flex-wrap:wrap;}
+.hlink{font-size:12px;color:#555;text-decoration:none;padding:8px 16px;border:1px solid #1f1f1f;border-radius:3px;display:flex;align-items:center;gap:6px;transition:all 0.2s;}
+.hlink:hover{border-color:#00ff88;color:#00ff88;box-shadow:0 0 12px rgba(0,255,136,0.1);}
+.hlink.primary{background:#00ff88;color:#0a0a0a;border-color:#00ff88;font-weight:500;}
+.hlink.primary:hover{background:#00cc6a;border-color:#00cc6a;box-shadow:0 0 20px rgba(0,255,136,0.3);}
+
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#1f4a2e;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
+.section-label::after{content:'';flex:1;height:1px;background:#111;}
+
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:3rem;}
+.stat{padding:1.25rem;border:1px solid #1a2a1a;border-radius:6px;background:#0d120d;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);cursor:default;position:relative;overflow:hidden;}
+.stat::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(0,255,136,0.06),transparent 70%);opacity:0;transition:opacity 0.3s;}
+.stat:hover::before{opacity:1;}
+.stat:hover{border-color:#00ff88;transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,255,136,0.08);}
+.stat:active{transform:scale(0.97);}
+.stat-n{font-size:28px;font-weight:600;color:#00ff88;letter-spacing:-0.03em;font-family:'JetBrains Mono',monospace;}
+.stat-l{font-size:10px;color:#2a4a2a;margin-top:4px;font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;}
+.stat-bar{height:2px;background:#111;border-radius:1px;margin-top:12px;overflow:hidden;}
+.stat-bar-fill{height:100%;background:linear-gradient(90deg,#00ff88,#00cc6a);border-radius:1px;width:0;transition:width 1.5s cubic-bezier(0.4,0,0.2,1);}
+
+.projects{margin-bottom:3rem;}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.proj-grid{grid-template-columns:1fr;}}
+.proj-card{border:1px solid #1a1a1a;border-radius:8px;background:#0d0d0d;padding:1.5rem;cursor:pointer;position:relative;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);overflow:hidden;}
+.proj-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,255,136,0.06) 0%,transparent 65%);opacity:0;transition:opacity 0.3s;pointer-events:none;}
+.proj-card:hover::before{opacity:1;}
+.proj-card:hover{border-color:#1f3f1f;transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+.proj-card.featured:hover{border-color:#00ff88;box-shadow:0 0 0 1px rgba(0,255,136,0.1),0 12px 40px rgba(0,255,136,0.06);}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;}
+.pc-badge{font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 9px;border-radius:2px;letter-spacing:0.06em;}
+.badge-ai{background:#0a0f0a;color:#00ff88;border:1px solid #1a3a1a;}
+.badge-bi{background:#0a0f0a;color:#00c875;border:1px solid #1a3020;}
+.badge-sql{background:#0a0f0a;color:#00bfff;border:1px solid #0d1e2a;}
+.badge-py{background:#0a0f0a;color:#f5a623;border:1px solid #2a1e0d;}
+.pc-arrow{font-size:16px;color:#222;transition:all 0.25s;}
+.proj-card:hover .pc-arrow{color:#00ff88;transform:translate(3px,-3px);}
+.pc-title{font-size:15px;font-weight:600;color:#e8e8e8;margin-bottom:0.5rem;letter-spacing:-0.01em;}
+.pc-short{font-size:12px;color:#444;line-height:1.7;margin-bottom:0.75rem;}
+.pc-detail{font-size:12px;color:#666;line-height:1.8;margin-bottom:0.75rem;max-height:0;overflow:hidden;transition:max-height 0.45s cubic-bezier(0.4,0,0.2,1),opacity 0.3s;opacity:0;}
+.proj-card:hover .pc-detail{max-height:200px;opacity:1;}
+.pc-metrics{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0.75rem;max-height:0;overflow:hidden;opacity:0;transition:max-height 0.4s,opacity 0.3s 0.1s;}
+.proj-card:hover .pc-metrics{max-height:60px;opacity:1;}
+.metric{font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 8px;background:#0a0f0a;border:1px solid #1a3a1a;border-radius:2px;color:#2a6b3a;}
+.pc-stack{display:flex;flex-wrap:wrap;gap:5px;}
+.stag{font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 7px;border:1px solid #151515;border-radius:2px;color:#2a2a2a;transition:color 0.2s,border-color 0.2s;}
+.proj-card:hover .stag{color:#2a5a2a;border-color:#1a3a1a;}
+.pc-link{display:inline-block;margin-top:10px;font-size:11px;color:#1f4a2e;text-decoration:none;font-family:'JetBrains Mono',monospace;transition:all 0.2s;opacity:0;max-height:0;overflow:hidden;}
+.proj-card:hover .pc-link{opacity:1;max-height:30px;}
+.pc-link:hover{color:#00ff88;}
+
+.skills-section{margin-bottom:3rem;}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:700px){.skills-grid{grid-template-columns:repeat(2,1fr);}}
+.skill-flip{height:140px;perspective:800px;cursor:pointer;}
+.skill-flip-inner{position:relative;width:100%;height:100%;transition:transform 0.55s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;}
+.skill-flip:hover .skill-flip-inner{transform:rotateY(180deg);}
+.skill-front,.skill-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:6px;padding:1rem;display:flex;flex-direction:column;justify-content:space-between;}
+.skill-front{background:#0d120d;border:1px solid #1a2a1a;transition:border-color 0.3s,box-shadow 0.3s;}
+.skill-flip:hover .skill-front{border-color:#00ff88;box-shadow:0 0 20px rgba(0,255,136,0.1);}
+.skill-back{background:#0a1f12;border:1px solid #00ff88;transform:rotateY(180deg);}
+.sf-name{font-size:11px;font-weight:500;color:#00ff88;font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;}
+.sf-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.sf-tag{font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 7px;border:1px solid #1a3a1a;border-radius:2px;color:#2a6b3a;transition:all 0.2s;}
+.skill-flip:hover .sf-tag{color:#00ff88;border-color:#00ff88;box-shadow:0 0 6px rgba(0,255,136,0.2);}
+.sb-title{font-size:10px;color:#00ff88;font-family:'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
+.sb-level{margin-bottom:5px;}
+.sb-skill-name{font-size:10px;color:#888;margin-bottom:3px;display:flex;justify-content:space-between;}
+.sb-skill-name span{color:#00ff88;}
+.sb-bar{height:3px;background:#1a1a1a;border-radius:2px;overflow:hidden;}
+.sb-bar-fill{height:100%;background:linear-gradient(90deg,#00ff88,#00cc6a);border-radius:2px;width:0;transition:width 0.7s ease 0.2s;}
+
+.exp-section{margin-bottom:3rem;}
+.exp-item{display:flex;gap:20px;padding:1.25rem 0;border-bottom:1px solid #111;}
+.exp-item:last-child{border-bottom:none;}
+.exp-line{width:1px;background:#1a2a1a;flex-shrink:0;position:relative;}
+.exp-line::before{content:'';position:absolute;top:5px;left:-4px;width:9px;height:9px;border-radius:50%;background:#0a0a0a;border:1px solid #00ff88;box-shadow:0 0 6px rgba(0,255,136,0.3);}
+.exp-body{flex:1;}
+.exp-role{font-size:14px;font-weight:500;color:#e8e8e8;margin-bottom:3px;}
+.exp-org{font-size:11px;color:#2a5a2a;margin-bottom:8px;font-family:'JetBrains Mono',monospace;}
+.exp-desc{font-size:12px;color:#444;line-height:1.8;}
+
+.cta-section{padding:2.5rem;border:1px solid #1a2a1a;border-radius:8px;background:#0d120d;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(0,255,136,0.04),transparent 70%);pointer-events:none;}
+.cta-text{font-size:18px;font-weight:500;color:#e8e8e8;letter-spacing:-0.01em;}
+.cta-sub{font-size:12px;color:#2a5a2a;margin-top:5px;font-family:'JetBrains Mono',monospace;}
+.cta-btns{display:flex;gap:10px;}
+.cta-btn{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;padding:10px 20px;border-radius:3px;border:1px solid #1f3f1f;background:transparent;color:#2a6b3a;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
+.cta-btn:hover{border-color:#00ff88;color:#00ff88;box-shadow:0 0 12px rgba(0,255,136,0.1);}
+.cta-btn.p{background:#00ff88;color:#0a0a0a;border-color:#00ff88;}
+.cta-btn.p:hover{background:#00cc6a;box-shadow:0 0 20px rgba(0,255,136,0.25);}
+
+.footer-bar{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;margin-top:2rem;border-top:1px solid #111;flex-wrap:wrap;gap:8px;}
+.footer-bar span{font-family:'JetBrains Mono',monospace;font-size:10px;color:#1f3f1f;}
+</style>
+</head>
+<body>
+<canvas id="rain"></canvas>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow"><span class="hero-dot"></span>Available for work · Delhi NCR · 2026</div>
+    <div class="hero-name">Harsh Bhatt</div>
+    <div class="hero-role">Data Analyst</div>
+    <p class="hero-desc">I build production-grade analytics systems — from AI-powered stock agents to enterprise risk dashboards. Final year BCA, DSEU. CGPA 9.2/10.</p>
+    <div class="hero-pills">
+      <span class="pill">SQL</span><span class="pill">Python</span><span class="pill">Power BI</span><span class="pill">DAX</span><span class="pill">PostgreSQL</span><span class="pill">Streamlit</span><span class="pill">Groq LLM</span><span class="pill">ETL</span><span class="pill">Star Schema</span><span class="pill">Plotly</span>
+    </div>
+    <div class="hero-links">
+      <a class="hlink" href="https://github.com/harshbhatt1600" target="_blank">↗ GitHub</a>
+      <a class="hlink" href="https://linkedin.com/in/harsh-bhatt-data" target="_blank">↗ LinkedIn</a>
+      <a class="hlink primary" href="mailto:harshbhatt296@gmail.com">Get in touch</a>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-n" data-target="6" data-suffix="+">0+</div>
+      <div class="stat-l">PROJECTS SHIPPED</div>
+      <div class="stat-bar"><div class="stat-bar-fill" data-w="60"></div></div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" data-target="479" data-suffix="K+">0K+</div>
+      <div class="stat-l">RECORDS ANALYZED</div>
+      <div class="stat-bar"><div class="stat-bar-fill" data-w="90"></div></div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" data-target="9.2" data-suffix="/10" data-decimal="1">0/10</div>
+      <div class="stat-l">CGPA</div>
+      <div class="stat-bar"><div class="stat-bar-fill" data-w="92"></div></div>
+    </div>
+  </div>
+
+  <div class="projects">
+    <div class="section-label">Selected projects</div>
+    <div class="proj-grid">
+
+      <div class="proj-card featured">
+        <div class="pc-top"><span class="pc-badge badge-ai">AI · Analytics</span><span class="pc-arrow">↗</span></div>
+        <div class="pc-title">AlphaAgent</div>
+        <div class="pc-short">Autonomous stock market intelligence agent with ReAct reasoning loop.</div>
+        <div class="pc-detail">Ask "Should I be worried about TCS?" — it fetches live NSE data, runs RSI/MACD/Bollinger Bands, detects Z-score anomalies, scrapes news sentiment, and generates a Bloomberg-style PDF. All autonomously.</div>
+        <div class="pc-metrics"><span class="metric">~80% API reduction</span><span class="metric">PostgreSQL caching</span><span class="metric">ReAct loop</span></div>
+        <div class="pc-stack"><span class="stag">Python</span><span class="stag">Groq LLM</span><span class="stag">PostgreSQL</span><span class="stag">Streamlit</span><span class="stag">Plotly</span><span class="stag">yfinance</span></div>
+        <a class="pc-link" href="https://github.com/harshbhatt1600/AlphaAgent" target="_blank">→ View on GitHub</a>
+      </div>
+
+      <div class="proj-card featured">
+        <div class="pc-top"><span class="pc-badge badge-ai">AI · Risk</span><span class="pc-arrow">↗</span></div>
+        <div class="pc-title">ERM Dashboard</div>
+        <div class="pc-short">Enterprise Risk Management platform for 4 executive personas.</div>
+        <div class="pc-detail">500-row risk register, 150 cybersecurity threats, KPI tracker across 8 departments. Groq-powered AI advisor answers queries with exact Risk IDs and owner names.</div>
+        <div class="pc-metrics"><span class="metric">ISO 31000 aligned</span><span class="metric">CVSS v3.1</span><span class="metric">4-tab Streamlit</span></div>
+        <div class="pc-stack"><span class="stag">Python</span><span class="stag">Streamlit</span><span class="stag">Plotly</span><span class="stag">Groq LLM</span><span class="stag">PostgreSQL</span></div>
+        <a class="pc-link" href="https://github.com/harshbhatt1600/erm-dashboard" target="_blank">→ View on GitHub</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="pc-top"><span class="pc-badge badge-bi">Power BI</span><span class="pc-arrow">↗</span></div>
+        <div class="pc-title">Retail BI Dashboard</div>
+        <div class="pc-short">End-to-end BI on PostgreSQL star schema with 15+ custom DAX measures.</div>
+        <div class="pc-detail">Surfaced 88% revenue concentration risk and 19.5% loss-making customers. Built drill-through pages, time intelligence, and KPI cards across 3 dashboard pages.</div>
+        <div class="pc-metrics"><span class="metric">Star schema</span><span class="metric">15+ DAX measures</span><span class="metric">3 pages</span></div>
+        <div class="pc-stack"><span class="stag">Power BI</span><span class="stag">DAX</span><span class="stag">PostgreSQL</span><span class="stag">Power Query</span></div>
+        <a class="pc-link" href="https://github.com/harshbhatt1600/retail-business-intelligence-dashboard" target="_blank">→ View on GitHub</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="pc-top"><span class="pc-badge badge-sql">SQL</span><span class="pc-arrow">↗</span></div>
+        <div class="pc-title">Customer Analytics</div>
+        <div class="pc-short">Cohort analysis, LTV segmentation and churn detection on 8,950 records.</div>
+        <div class="pc-detail">Used CTEs and window functions to identify top 25% customers driving majority of revenue. Built 6-month churn detection and cohort revenue trend analysis.</div>
+        <div class="pc-metrics"><span class="metric">8,950 records</span><span class="metric">Cohort + LTV + Churn</span></div>
+        <div class="pc-stack"><span class="stag">PostgreSQL</span><span class="stag">CTEs</span><span class="stag">Window functions</span><span class="stag">Python</span></div>
+        <a class="pc-link" href="https://github.com/harshbhatt1600/sql-customer-analytics" target="_blank">→ View on GitHub</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="pc-top"><span class="pc-badge badge-py">Python</span><span class="pc-arrow">↗</span></div>
+        <div class="pc-title">Credit Card Intelligence</div>
+        <div class="pc-short">Behavioral segmentation of 8,950 credit card customers into 4 risk profiles.</div>
+        <div class="pc-detail">Engineered Credit Utilization Rate and Payment Ratio features. Identified 11% high-risk and 66% persistent-balance customers with 5 stakeholder business recommendations.</div>
+        <div class="pc-metrics"><span class="metric">4-segment model</span><span class="metric">Feature engineering</span></div>
+        <div class="pc-stack"><span class="stag">Python</span><span class="stag">Pandas</span><span class="stag">NumPy</span><span class="stag">Matplotlib</span></div>
+        <a class="pc-link" href="https://github.com/harshbhatt1600/credit-card-customer-analysis" target="_blank">→ View on GitHub</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="pc-top"><span class="pc-badge badge-bi">Power BI</span><span class="pc-arrow">↗</span></div>
+        <div class="pc-title">Job Market Intelligence</div>
+        <div class="pc-short">Interactive dashboard analyzing 479K+ job postings for hiring trends.</div>
+        <div class="pc-detail">MoM growth calculations, RANKX top 10 company rankings, geographic hiring distribution. Identified December +124% hiring rebound after Q3 decline.</div>
+        <div class="pc-metrics"><span class="metric">479K+ records</span><span class="metric">Time intelligence</span><span class="metric">RANKX</span></div>
+        <div class="pc-stack"><span class="stag">Power BI</span><span class="stag">DAX</span><span class="stag">Star schema</span></div>
+        <a class="pc-link" href="https://github.com/harshbhatt1600/Job-Market-Intelligence-Dashboard" target="_blank">→ View on GitHub</a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="skills-section">
+    <div class="section-label">Skills — hover to flip</div>
+    <div class="skills-grid">
+
+      <div class="skill-flip">
+        <div class="skill-flip-inner">
+          <div class="skill-front">
+            <div class="sf-name">Analytics & BI</div>
+            <div class="sf-tags"><span class="sf-tag">SQL</span><span class="sf-tag">Power BI</span><span class="sf-tag">DAX</span><span class="sf-tag">Power Query</span></div>
+          </div>
+          <div class="skill-back">
+            <div class="sb-title">Proficiency</div>
+            <div class="sb-level"><div class="sb-skill-name">SQL <span>95%</span></div><div class="sb-bar"><div class="sb-bar-fill" data-w="95"></div></div></div>
+            <div class="sb-level"><div class="sb-skill-name">Power BI <span>88%</span></div><div class="sb-bar"><div class="sb-bar-fill" data-w="88"></div></div></div>
+            <div class="sb-level"><div class="sb-skill-name">DAX <span>82%</span></div><div class="sb-bar"><div class="sb-bar-fill" data-w="82"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-flip">
+        <div class="skill-flip-inner">
+          <div class="skill-front">
+            <div class="sf-name">Programming</div>
+            <div class="sf-tags"><span class="sf-tag">Python</span><span class="sf-tag">Pandas</span><span class="sf-tag">NumPy</span><span class="sf-tag">Streamlit</span></div>
+          </div>
+          <div class="skill-back">
+            <div class="sb-title">Proficiency</div>
+            <div class="sb-level"><div class="sb-skill-name">Python <span>85%</span></div><div class="sb-bar"><div class="sb-bar-fill" data-w="85"></div></div></div>
+            <div class="sb-level"><div class="sb-skill-name">Pandas <span>88%</span></div><div class="sb-bar"><div class="sb-bar-fill" data-w="88"></div></div></div>
+            <div class="sb-level"><div class="sb-skill-name">Streamlit <span>80%</span></div><div class="sb-bar"><div class="sb-bar-fill" data-w="80"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-flip">
+        <div class="skill-flip-inner">
+          <div class="skill-front">
+            <div class="sf-name">Data & AI</div>
+            <div class="sf-tags"><span class="sf-tag">PostgreSQL</span><span class="sf-tag">ETL</span><span class="sf-tag">Groq LLM</span><span class="sf-tag">GenAI</span></div>
+          </div>
+          <div class="skill-back">
+            <div class="sb-title">Proficiency</div>
+            <div class="sb-level"><div class="sb-skill-name">PostgreSQL <span>85%</span></div><div class="sb-bar"><div class="sb-bar-fill" data-w="85"></div></div></div>
+            <div class="sb-level"><div class="sb-skill-name">ETL <span>80%</span></div><div class="sb-bar"><div class="sb-bar-fill" data-w="80"></div></div></div>
+            <div class="sb-level"><div class="sb-skill-name">LLM Integration <span>78%</span></div><div class="sb-bar"><div class="sb-bar-fill" data-w="78"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-flip">
+        <div class="skill-flip-inner">
+          <div class="skill-front">
+            <div class="sf-name">Visualization</div>
+            <div class="sf-tags"><span class="sf-tag">Plotly</span><span class="sf-tag">Matplotlib</span><span class="sf-tag">Seaborn</span><span class="sf-tag">ReportLab</span></div>
+          </div>
+          <div class="skill-back">
+            <div class="sb-title">Proficiency</div>
+            <div class="sb-level"><div class="sb-skill-name">Plotly <span>85%</span></div><div class="sb-bar"><div class="sb-bar-fill" data-w="85"></div></div></div>
+            <div class="sb-level"><div class="sb-skill-name">Matplotlib <span>88%</span></div><div class="sb-bar"><div class="sb-bar-fill" data-w="88"></div></div></div>
+            <div class="sb-level"><div class="sb-skill-name">Seaborn <span>82%</span></div><div class="sb-bar"><div class="sb-bar-fill" data-w="82"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="exp-section">
+    <div class="section-label">Experience & education</div>
+    <div class="exp-item">
+      <div class="exp-line"></div>
+      <div class="exp-body">
+        <div class="exp-role">Data Analytics Intern</div>
+        <div class="exp-org">FICCI · Jun–Jul 2025 · New Delhi</div>
+        <div class="exp-desc">Audited 300+ governance records — reduced manual correction effort by 40%. Delivered 10+ analytical reports for cross-functional stakeholders with 100% on-time submission and zero errors.</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-line"></div>
+      <div class="exp-body">
+        <div class="exp-role">Bachelor of Computer Applications (BCA)</div>
+        <div class="exp-org">Delhi Skill and Entrepreneurship University · 2023–2026</div>
+        <div class="exp-desc">CGPA: 9.2/10 · Specialization in data analytics, AI, and software development. Final year, graduating 2026.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div>
+      <div class="cta-text">Open to Data Analyst roles in Delhi NCR</div>
+      <div class="cta-sub">Fresher · Available immediately · Hybrid or remote</div>
+    </div>
+    <div class="cta-btns">
+      <a class="cta-btn" href="https://github.com/harshbhatt1600" target="_blank">GitHub ↗</a>
+      <a class="cta-btn p" href="mailto:harshbhatt296@gmail.com">Get in touch</a>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>Harsh Bhatt · harshbhatt296@gmail.com · +91 9811785456</span>
+    <span>Delhi NCR · Built 2026</span>
+  </div>
+
+</div>
+
+<script>
+// Matrix rain
+const canvas = document.getElementById('rain');
+const ctx = canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();
+window.addEventListener('resize',resize);
+const cols=Math.floor(canvas.width/20);
+const drops=Array(cols).fill(1);
+const chars='アイウエオカキクケコ01ABCDEFabcdef<>{}[]01010110';
+function drawRain(){
+  ctx.fillStyle='rgba(10,10,10,0.05)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.font='13px JetBrains Mono';
+  drops.forEach((y,i)=>{
+    ctx.globalAlpha=Math.random()*0.4+0.05;
+    ctx.fillStyle='#00ff88';
+    ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*20,y*20);
+    if(y*20>canvas.height&&Math.random()>0.975)drops[i]=0;
+    drops[i]++;
+  });
+  ctx.globalAlpha=1;
+}
+setInterval(drawRain,60);
+
+// Project card cursor glow
+document.querySelectorAll('.proj-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+    card.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+  });
+});
+
+// Animated counters
+function animateCounter(el){
+  const target=parseFloat(el.dataset.target);
+  const suffix=el.dataset.suffix||'';
+  const decimal=parseInt(el.dataset.decimal||'0');
+  const duration=1800;
+  const start=performance.now();
+  function update(now){
+    const t=Math.min((now-start)/duration,1);
+    const ease=1-Math.pow(1-t,3);
+    const val=target*ease;
+    el.textContent=(decimal?val.toFixed(decimal):Math.floor(val))+suffix;
+    if(t<1)requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// Stat bar animation
+function animateStatBars(){
+  document.querySelectorAll('.stat-bar-fill').forEach(bar=>{
+    bar.style.width=bar.dataset.w+'%';
+  });
+}
+
+// Skill bar animation on flip
+document.querySelectorAll('.skill-flip').forEach(card=>{
+  card.addEventListener('mouseenter',()=>{
+    card.querySelectorAll('.sb-bar-fill').forEach(bar=>{
+      bar.style.width=bar.dataset.w+'%';
+    });
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.querySelectorAll('.sb-bar-fill').forEach(bar=>{
+      bar.style.width='0';
+    });
+  });
+});
+
+// Intersection observer — trigger counters + stat bars
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      document.querySelectorAll('.stat-n[data-target]').forEach(animateCounter);
+      setTimeout(animateStatBars,400);
+      observer.disconnect();
+    }
+  });
+},{threshold:0.3});
+observer.observe(document.querySelector('.stats-row'));
+</script>
+</body>
+</html>
