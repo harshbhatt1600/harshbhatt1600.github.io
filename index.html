@@ -44,14 +44,29 @@ canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
 .stat-bar{height:2px;background:#111;border-radius:1px;margin-top:12px;overflow:hidden;}
 .stat-bar-fill{height:100%;background:linear-gradient(90deg,#00ff88,#00cc6a);border-radius:1px;width:0;transition:width 1.5s cubic-bezier(0.4,0,0.2,1);}
 
+/* PROJECT CARDS — full card is clickable link */
 .projects{margin-bottom:3rem;}
 .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(max-width:600px){.proj-grid{grid-template-columns:1fr;}}
-.proj-card{border:1px solid #1a1a1a;border-radius:8px;background:#0d0d0d;padding:1.5rem;cursor:pointer;position:relative;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);overflow:hidden;}
+
+.proj-card{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  border:1px solid #1a1a1a;
+  border-radius:8px;
+  background:#0d0d0d;
+  padding:1.5rem;
+  cursor:pointer;
+  position:relative;
+  transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow:hidden;
+}
 .proj-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,255,136,0.06) 0%,transparent 65%);opacity:0;transition:opacity 0.3s;pointer-events:none;}
 .proj-card:hover::before{opacity:1;}
 .proj-card:hover{border-color:#1f3f1f;transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
 .proj-card.featured:hover{border-color:#00ff88;box-shadow:0 0 0 1px rgba(0,255,136,0.1),0 12px 40px rgba(0,255,136,0.06);}
+
 .pc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;}
 .pc-badge{font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 9px;border-radius:2px;letter-spacing:0.06em;}
 .badge-ai{background:#0a0f0a;color:#00ff88;border:1px solid #1a3a1a;}
@@ -70,10 +85,10 @@ canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
 .pc-stack{display:flex;flex-wrap:wrap;gap:5px;}
 .stag{font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 7px;border:1px solid #151515;border-radius:2px;color:#2a2a2a;transition:color 0.2s,border-color 0.2s;}
 .proj-card:hover .stag{color:#2a5a2a;border-color:#1a3a1a;}
-.pc-link{display:inline-block;margin-top:10px;font-size:11px;color:#1f4a2e;text-decoration:none;font-family:'JetBrains Mono',monospace;transition:all 0.2s;opacity:0;max-height:0;overflow:hidden;}
-.proj-card:hover .pc-link{opacity:1;max-height:30px;}
-.pc-link:hover{color:#00ff88;}
+.pc-github{display:block;margin-top:12px;font-size:11px;color:#1f4a2e;font-family:'JetBrains Mono',monospace;opacity:0;transition:opacity 0.2s 0.15s;}
+.proj-card:hover .pc-github{opacity:1;color:#00ff88;}
 
+/* SKILLS FLIP */
 .skills-section{margin-bottom:3rem;}
 .skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 @media(max-width:700px){.skills-grid{grid-template-columns:repeat(2,1fr);}}
@@ -95,6 +110,7 @@ canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
 .sb-bar{height:3px;background:#1a1a1a;border-radius:2px;overflow:hidden;}
 .sb-bar-fill{height:100%;background:linear-gradient(90deg,#00ff88,#00cc6a);border-radius:2px;width:0;transition:width 0.7s ease 0.2s;}
 
+/* EXP */
 .exp-section{margin-bottom:3rem;}
 .exp-item{display:flex;gap:20px;padding:1.25rem 0;border-bottom:1px solid #111;}
 .exp-item:last-child{border-bottom:none;}
@@ -105,6 +121,7 @@ canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
 .exp-org{font-size:11px;color:#2a5a2a;margin-bottom:8px;font-family:'JetBrains Mono',monospace;}
 .exp-desc{font-size:12px;color:#444;line-height:1.8;}
 
+/* CTA */
 .cta-section{padding:2.5rem;border:1px solid #1a2a1a;border-radius:8px;background:#0d120d;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;position:relative;overflow:hidden;}
 .cta-section::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(0,255,136,0.04),transparent 70%);pointer-events:none;}
 .cta-text{font-size:18px;font-weight:500;color:#e8e8e8;letter-spacing:-0.01em;}
@@ -112,7 +129,7 @@ canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
 .cta-btns{display:flex;gap:10px;}
 .cta-btn{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;padding:10px 20px;border-radius:3px;border:1px solid #1f3f1f;background:transparent;color:#2a6b3a;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
 .cta-btn:hover{border-color:#00ff88;color:#00ff88;box-shadow:0 0 12px rgba(0,255,136,0.1);}
-.cta-btn.p{background:#00ff88;color:#0a0a0a;border-color:#00ff88;}
+.cta-btn.p{background:#00ff88;color:#0a0a0a;border-color:#00ff88;font-weight:600;}
 .cta-btn.p:hover{background:#00cc6a;box-shadow:0 0 20px rgba(0,255,136,0.25);}
 
 .footer-bar{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;margin-top:2rem;border-top:1px solid #111;flex-wrap:wrap;gap:8px;}
@@ -123,6 +140,7 @@ canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
 <canvas id="rain"></canvas>
 <div class="wrap">
 
+  <!-- HERO -->
   <div class="hero">
     <div class="hero-eyebrow"><span class="hero-dot"></span>Available for work · Delhi NCR · 2026</div>
     <div class="hero-name">Harsh Bhatt</div>
@@ -133,11 +151,12 @@ canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
     </div>
     <div class="hero-links">
       <a class="hlink" href="https://github.com/harshbhatt1600" target="_blank">↗ GitHub</a>
-      <a class="hlink" href="https://linkedin.com/in/harsh-bhatt-data" target="_blank">↗ LinkedIn</a>
+      <a class="hlink" href="https://www.linkedin.com/in/harsh-bhatt-296a8b284/" target="_blank">↗ LinkedIn</a>
       <a class="hlink primary" href="mailto:harshbhatt296@gmail.com">Get in touch</a>
     </div>
   </div>
 
+  <!-- STATS -->
   <div class="stats-row">
     <div class="stat">
       <div class="stat-n" data-target="6" data-suffix="+">0+</div>
@@ -156,73 +175,75 @@ canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
     </div>
   </div>
 
+  <!-- PROJECTS — each card is a full clickable link -->
   <div class="projects">
-    <div class="section-label">Selected projects</div>
+    <div class="section-label">Selected projects — click to open</div>
     <div class="proj-grid">
 
-      <div class="proj-card featured">
+      <a class="proj-card featured" href="https://github.com/harshbhatt1600/AlphaAgent" target="_blank">
         <div class="pc-top"><span class="pc-badge badge-ai">AI · Analytics</span><span class="pc-arrow">↗</span></div>
         <div class="pc-title">AlphaAgent</div>
         <div class="pc-short">Autonomous stock market intelligence agent with ReAct reasoning loop.</div>
         <div class="pc-detail">Ask "Should I be worried about TCS?" — it fetches live NSE data, runs RSI/MACD/Bollinger Bands, detects Z-score anomalies, scrapes news sentiment, and generates a Bloomberg-style PDF. All autonomously.</div>
         <div class="pc-metrics"><span class="metric">~80% API reduction</span><span class="metric">PostgreSQL caching</span><span class="metric">ReAct loop</span></div>
         <div class="pc-stack"><span class="stag">Python</span><span class="stag">Groq LLM</span><span class="stag">PostgreSQL</span><span class="stag">Streamlit</span><span class="stag">Plotly</span><span class="stag">yfinance</span></div>
-        <a class="pc-link" href="https://github.com/harshbhatt1600/AlphaAgent" target="_blank">→ View on GitHub</a>
-      </div>
+        <div class="pc-github">→ github.com/harshbhatt1600/AlphaAgent</div>
+      </a>
 
-      <div class="proj-card featured">
+      <a class="proj-card featured" href="https://github.com/harshbhatt1600/erm-dashboard" target="_blank">
         <div class="pc-top"><span class="pc-badge badge-ai">AI · Risk</span><span class="pc-arrow">↗</span></div>
         <div class="pc-title">ERM Dashboard</div>
         <div class="pc-short">Enterprise Risk Management platform for 4 executive personas.</div>
         <div class="pc-detail">500-row risk register, 150 cybersecurity threats, KPI tracker across 8 departments. Groq-powered AI advisor answers queries with exact Risk IDs and owner names.</div>
         <div class="pc-metrics"><span class="metric">ISO 31000 aligned</span><span class="metric">CVSS v3.1</span><span class="metric">4-tab Streamlit</span></div>
         <div class="pc-stack"><span class="stag">Python</span><span class="stag">Streamlit</span><span class="stag">Plotly</span><span class="stag">Groq LLM</span><span class="stag">PostgreSQL</span></div>
-        <a class="pc-link" href="https://github.com/harshbhatt1600/erm-dashboard" target="_blank">→ View on GitHub</a>
-      </div>
+        <div class="pc-github">→ github.com/harshbhatt1600/erm-dashboard</div>
+      </a>
 
-      <div class="proj-card">
+      <a class="proj-card" href="https://github.com/harshbhatt1600/retail-business-intelligence-dashboard" target="_blank">
         <div class="pc-top"><span class="pc-badge badge-bi">Power BI</span><span class="pc-arrow">↗</span></div>
         <div class="pc-title">Retail BI Dashboard</div>
         <div class="pc-short">End-to-end BI on PostgreSQL star schema with 15+ custom DAX measures.</div>
         <div class="pc-detail">Surfaced 88% revenue concentration risk and 19.5% loss-making customers. Built drill-through pages, time intelligence, and KPI cards across 3 dashboard pages.</div>
         <div class="pc-metrics"><span class="metric">Star schema</span><span class="metric">15+ DAX measures</span><span class="metric">3 pages</span></div>
         <div class="pc-stack"><span class="stag">Power BI</span><span class="stag">DAX</span><span class="stag">PostgreSQL</span><span class="stag">Power Query</span></div>
-        <a class="pc-link" href="https://github.com/harshbhatt1600/retail-business-intelligence-dashboard" target="_blank">→ View on GitHub</a>
-      </div>
+        <div class="pc-github">→ github.com/harshbhatt1600/retail-business-intelligence-dashboard</div>
+      </a>
 
-      <div class="proj-card">
+      <a class="proj-card" href="https://github.com/harshbhatt1600/sql-customer-analytics" target="_blank">
         <div class="pc-top"><span class="pc-badge badge-sql">SQL</span><span class="pc-arrow">↗</span></div>
         <div class="pc-title">Customer Analytics</div>
         <div class="pc-short">Cohort analysis, LTV segmentation and churn detection on 8,950 records.</div>
         <div class="pc-detail">Used CTEs and window functions to identify top 25% customers driving majority of revenue. Built 6-month churn detection and cohort revenue trend analysis.</div>
         <div class="pc-metrics"><span class="metric">8,950 records</span><span class="metric">Cohort + LTV + Churn</span></div>
         <div class="pc-stack"><span class="stag">PostgreSQL</span><span class="stag">CTEs</span><span class="stag">Window functions</span><span class="stag">Python</span></div>
-        <a class="pc-link" href="https://github.com/harshbhatt1600/sql-customer-analytics" target="_blank">→ View on GitHub</a>
-      </div>
+        <div class="pc-github">→ github.com/harshbhatt1600/sql-customer-analytics</div>
+      </a>
 
-      <div class="proj-card">
+      <a class="proj-card" href="https://github.com/harshbhatt1600/credit-card-customer-analysis" target="_blank">
         <div class="pc-top"><span class="pc-badge badge-py">Python</span><span class="pc-arrow">↗</span></div>
         <div class="pc-title">Credit Card Intelligence</div>
         <div class="pc-short">Behavioral segmentation of 8,950 credit card customers into 4 risk profiles.</div>
         <div class="pc-detail">Engineered Credit Utilization Rate and Payment Ratio features. Identified 11% high-risk and 66% persistent-balance customers with 5 stakeholder business recommendations.</div>
         <div class="pc-metrics"><span class="metric">4-segment model</span><span class="metric">Feature engineering</span></div>
         <div class="pc-stack"><span class="stag">Python</span><span class="stag">Pandas</span><span class="stag">NumPy</span><span class="stag">Matplotlib</span></div>
-        <a class="pc-link" href="https://github.com/harshbhatt1600/credit-card-customer-analysis" target="_blank">→ View on GitHub</a>
-      </div>
+        <div class="pc-github">→ github.com/harshbhatt1600/credit-card-customer-analysis</div>
+      </a>
 
-      <div class="proj-card">
+      <a class="proj-card" href="https://github.com/harshbhatt1600/Job-Market-Intelligence-Dashboard" target="_blank">
         <div class="pc-top"><span class="pc-badge badge-bi">Power BI</span><span class="pc-arrow">↗</span></div>
         <div class="pc-title">Job Market Intelligence</div>
         <div class="pc-short">Interactive dashboard analyzing 479K+ job postings for hiring trends.</div>
         <div class="pc-detail">MoM growth calculations, RANKX top 10 company rankings, geographic hiring distribution. Identified December +124% hiring rebound after Q3 decline.</div>
         <div class="pc-metrics"><span class="metric">479K+ records</span><span class="metric">Time intelligence</span><span class="metric">RANKX</span></div>
         <div class="pc-stack"><span class="stag">Power BI</span><span class="stag">DAX</span><span class="stag">Star schema</span></div>
-        <a class="pc-link" href="https://github.com/harshbhatt1600/Job-Market-Intelligence-Dashboard" target="_blank">→ View on GitHub</a>
-      </div>
+        <div class="pc-github">→ github.com/harshbhatt1600/Job-Market-Intelligence-Dashboard</div>
+      </a>
 
     </div>
   </div>
 
+  <!-- SKILLS FLIP -->
   <div class="skills-section">
     <div class="section-label">Skills — hover to flip</div>
     <div class="skills-grid">
@@ -290,6 +311,7 @@ canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
     </div>
   </div>
 
+  <!-- EXPERIENCE -->
   <div class="exp-section">
     <div class="section-label">Experience & education</div>
     <div class="exp-item">
@@ -310,6 +332,7 @@ canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
     </div>
   </div>
 
+  <!-- CTA -->
   <div class="cta-section">
     <div>
       <div class="cta-text">Open to Data Analyst roles in Delhi NCR</div>
@@ -317,7 +340,7 @@ canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
     </div>
     <div class="cta-btns">
       <a class="cta-btn" href="https://github.com/harshbhatt1600" target="_blank">GitHub ↗</a>
-      <a class="cta-btn p" href="mailto:harshbhatt296@gmail.com">Get in touch</a>
+      <a class="cta-btn p" href="mailto:harshbhatt296@gmail.com">✉ Get in touch</a>
     </div>
   </div>
 
@@ -330,8 +353,8 @@ canvas#rain{position:fixed;inset:0;opacity:0.06;pointer-events:none;z-index:0;}
 
 <script>
 // Matrix rain
-const canvas = document.getElementById('rain');
-const ctx = canvas.getContext('2d');
+const canvas=document.getElementById('rain');
+const ctx=canvas.getContext('2d');
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
 resize();
 window.addEventListener('resize',resize);
@@ -379,7 +402,6 @@ function animateCounter(el){
   requestAnimationFrame(update);
 }
 
-// Stat bar animation
 function animateStatBars(){
   document.querySelectorAll('.stat-bar-fill').forEach(bar=>{
     bar.style.width=bar.dataset.w+'%';
@@ -400,7 +422,7 @@ document.querySelectorAll('.skill-flip').forEach(card=>{
   });
 });
 
-// Intersection observer — trigger counters + stat bars
+// Trigger counters + stat bars when stats section is visible
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
